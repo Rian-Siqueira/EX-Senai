@@ -10,11 +10,11 @@ class Livro:
         print(f"Autor: {self.autor}")
         print(f"Isbn: {self.isbn}")
         print(f"Disponivel: {self.disponivel}")
-        print("-" * 80)
+       
    
     def devolver(self):
         if  self.disponivel == False:
-            print("Livro Devolvido")
+            print(f"Livro {self.titulo } foi Devolvido")
             self.disponivel = True
         else:
             print("O livro já foi devolvido")
@@ -23,7 +23,7 @@ class Livro:
         if self.disponivel == True:
             self.disponivel = False
         else:
-            print("Livro Emprestado")
+            print(f"O Livro {self.titulo} foi Emprestado")
 
 class Usuario:
     def __init__(self,nome,matricula):
@@ -32,27 +32,32 @@ class Usuario:
         self.limite = 1
         self.emprestados = []
     
-    def pegar_livro(self,Livro):
+    def pegar_livro(self,livro):
         if len(self.emprestados) < self.limite:
-            Livro.emprestar()
+            livro.emprestar()
             self.emprestados.append(Livro) 
            
-
 class Aluno(Usuario):
-    limite = 2
-
+    def __init__(self, nome, matricula):
+        super().__init__(nome, matricula)
+        self.limite = 1
+   
 class Professor(Usuario):
-    limite = 5
+   def __init__(self, nome, matricula):
+       super().__init__(nome, matricula)
+       self.limite = 5
 
 
 L1 = Livro("Tudo e Rio", "Carla Madeira", 302, False)
+L2 = Livro("L2", "A2", 304, True)
+L3 = Livro("L3", "A3", 301, False)
+A1 = Aluno("Rian", 67)
+A2 = Aluno("J", 76)
 
 
 
-
-L1.emprestar()
-L1.descrição()
+A1.pegar_livro(L1)
 L1.devolver()
-L1.descrição()
-
+print("-" * 80)
+L2.descrição()
 
